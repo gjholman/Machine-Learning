@@ -1,6 +1,6 @@
 # Machine Learning Projects
 
-This repository is for some personal projects I have been working on involving machine learning. Some of these projects are from Codecademy, while others are some other personal projects
+This repository is for some personal projects I have been working on involving machine learning. Some of these projects are from Codecademy, while others are just personal projects
 
 ## Project list and features
 
@@ -17,5 +17,5 @@ This repository is for some personal projects I have been working on involving m
 - PyPlot
 
 ### Tic Tac Toe AI
-- Minimax Recursion (Determining best outcome of decision by creating decision tree)
+- Minimax Recursion 
 - Tic Tac Toe game
