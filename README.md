@@ -19,7 +19,8 @@ This repository is for some personal projects I have been working on involving m
 ### NCAAM Basketball Data Analytics (Personal / Google Cloud)
 - Load dataset using google cloud's bigquery to access kaggle datasets
 - Jupyter Notebook
-- Data Visualization *(in progress)*
+- Data Visualization 
+- Pandas
 
 ### Tic Tac Toe AI (Codecademy)
 - Minimax Recursion 
