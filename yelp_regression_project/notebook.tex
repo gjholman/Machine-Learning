@@ -1,0 +1,1656 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{yelp\_regression}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{project-yelp-rating-regression-predictor}{%
+\section{Project: Yelp Rating Regression
+Predictor}\label{project-yelp-rating-regression-predictor}}
+
+The restaurant industry is tougher than ever, with restaurant reviews
+blazing across the Internet from day one of a restaurant's opening. But
+as a lover of food, you and your friend decide to break into the
+industry and open up your own restaurant, Danielle's Delicious
+Delicacies. Since a restaurant's success is highly correlated with its
+reputation, you want to make sure Danielle's Delicious Delicacies has
+the best reviews on the most queried restaurant review site: Yelp! While
+you know your food will be delicious, you think there are other factors
+that play into a Yelp rating and will ultimately determine your
+business's success. With a dataset of different restaurant features and
+their Yelp ratings, you decide to use a Multiple Linear Regression model
+to investigate what factors most affect a restaurant's Yelp rating and
+predict the Yelp rating for your restaurant!
+
+In this project we'll be working with a real dataset provided by Yelp.
+We have provided six files, listed below with a brief description: *
+\texttt{yelp\_business.json}: establishment data regarding location and
+attributes for all businesses in the dataset *
+\texttt{yelp\_review.json}: Yelp review metadata by business *
+\texttt{yelp\_user.json}: user profile metadata by business *
+\texttt{yelp\_checkin.json}: online checkin metadata by business *
+\texttt{yelp\_tip.json}: tip metadata by business *
+\texttt{yelp\_photo.json}: photo metadata by business
+
+For a more detailed explanation of the features in each \texttt{.json}
+file, see the accompanying
+\href{https://docs.google.com/document/d/1V6FjJpKspVBOOBs4E7fBfp_yzHn0--XJkC2uUtWuRgM/edit}{explanatory
+feature document}.
+
+Let's get started by exploring the data in each of these files to see
+what we are working with.
+
+    \hypertarget{load-the-data-and-take-a-peek}{%
+\subsection{Load the Data and Take a
+Peek}\label{load-the-data-and-take-a-peek}}
+
+To get a better understanding of the dataset we can use Pandas to
+explore the data in DataFrame form. In the code block below we have
+imported Pandas for you. The \texttt{read\_json()} method reads data
+from a json file into a DataFrame, as shown below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.read_json(}\StringTok{'file_name.json'}\NormalTok{, lines}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Load the data from each of the json files with the following naming
+conventions: * \texttt{yelp\_business.json} into a DataFrame named
+\texttt{businesses} * \texttt{yelp\_review.json} into a DataFrame named
+\texttt{reviews} * \texttt{yelp\_user.json} into a DataFrame named
+\texttt{users} * \texttt{yelp\_checkin.json} into a DataFrame named
+\texttt{checkins} * \texttt{yelp\_tip.json} into a DataFrame named
+\texttt{tips} * \texttt{yelp\_photo.json} into a DataFrame named
+\texttt{photos}
+
+Importing that data could take 10 to 20 seconds to run depending on your
+computer, but don't worry, once it's loaded in you're ready to go!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        
+        \PY{n}{business} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}json}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yelp\PYZus{}business.json}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{lines}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{reviews} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}json}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yelp\PYZus{}review.json}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{lines}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{users} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}json}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yelp\PYZus{}user.json}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{lines}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{checkins} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}json}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yelp\PYZus{}checkin.json}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{lines}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{tips} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}json}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yelp\PYZus{}tip.json}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{lines}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{photos} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}json}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yelp\PYZus{}photo.json}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{lines}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    In order to more clearly see the information in our DataFrame, we can
+adjust the number of columns shown (\texttt{max\_columns}) and the
+number of characters shown in a column (\texttt{max\_colwidth}) with the
+below code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pd.options.display.max_columns }\OperatorTok{=}\NormalTok{ number_of_columns_to_display}
+\NormalTok{pd.options.display.max_colwidth }\OperatorTok{=}\NormalTok{ number_of_characters_to_display}
+\end{Highlighting}
+\end{Shaded}
+
+Set \texttt{max\_columns} to \texttt{60} and \texttt{max\_colwidth} to
+\texttt{500}. We are working with some BIG data here!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{pd}\PY{o}{.}\PY{n}{options}\PY{o}{.}\PY{n}{display}\PY{o}{.}\PY{n}{max\PYZus{}columns} \PY{o}{=} \PY{l+m+mi}{60}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{options}\PY{o}{.}\PY{n}{display}\PY{o}{.}\PY{n}{max\PYZus{}colwidth} \PY{o}{=} \PY{l+m+mi}{500}
+\end{Verbatim}
+
+
+    Inspect the first five rows of each DataFrame using the \texttt{.head()}
+method to get an overview of the data (make sure to check each DataFrame
+in a separate cell in order to view it properly).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{business}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:}                address  alcohol?  \textbackslash{}
+        0    1314 44 Avenue NE         0   
+        1                              0   
+        2  1335 rue Beaubien E         1   
+        3      211 W Monroe St         0   
+        4  2005 Alyth Place SE         0   
+        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    attributes  \textbackslash{}
+        0                                              \{'BikeParking': 'False', 'BusinessAcceptsCreditCards': 'True', 'BusinessParking': '\{'garage': False, 'street': True, 'validated': False, 'lot': False, 'valet': False\}', 'GoodForKids': 'True', 'HasTV': 'True', 'NoiseLevel': 'average', 'OutdoorSeating': 'False', 'RestaurantsAttire': 'casual', 'RestaurantsDelivery': 'False', 'RestaurantsGoodForGroups': 'True', 'RestaurantsPriceRange2': '2', 'RestaurantsReservations': 'True', 'RestaurantsTakeOut': 'True'\}   
+        1  \{'Alcohol': 'none', 'BikeParking': 'False', 'BusinessAcceptsCreditCards': 'True', 'BusinessParking': '\{'garage': False, 'street': True, 'validated': False, 'lot': True, 'valet': False\}', 'Caters': 'True', 'DogsAllowed': 'True', 'DriveThru': 'False', 'GoodForKids': 'True', 'GoodForMeal': '\{'dessert': False, 'latenight': False, 'lunch': False, 'dinner': False, 'breakfast': False, 'brunch': False\}', 'HasTV': 'False', 'OutdoorSeating': 'True', 'RestaurantsAttire': 'casual', 'RestaurantsDelivery'{\ldots}   
+        2  \{'Alcohol': 'beer\_and\_wine', 'Ambience': '\{'romantic': False, 'intimate': False, 'classy': False, 'hipster': False, 'touristy': False, 'trendy': False, 'upscale': False, 'casual': False\}', 'BikeParking': 'True', 'BusinessAcceptsCreditCards': 'False', 'BusinessParking': '\{'garage': False, 'street': False, 'validated': False, 'lot': False, 'valet': False\}', 'Caters': 'False', 'GoodForKids': 'True', 'GoodForMeal': '\{'dessert': False, 'latenight': False, 'lunch': False, 'dinner': False, 'breakfa{\ldots}   
+        3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 None   
+        4                                                                                                                                                                                                                                                                                                                                                                                                                                                                               \{'BusinessAcceptsCreditCards': 'True'\}   
+        
+                      business\_id  \textbackslash{}
+        0  Apn5Q\_b6Nz61Tq4XzPdf9A   
+        1  AjEbIBw6ZFfln7ePHha9PA   
+        2  O8S5hYJ1SMc8fA4QBtVujA   
+        3  bFzdJJ3wp3PZssNEsyU23g   
+        4  8USyCYqpScwiNEb58Bt6CA   
+        
+                                                                                                                      categories  \textbackslash{}
+        0                                                            Tours, Breweries, Pizza, Restaurants, Food, Hotels \& Travel   
+        1  Chicken Wings, Burgers, Caterers, Street Vendors, Barbeque, Food Trucks, Food, Restaurants, Event Planning \& Services   
+        2                                                             Breakfast \& Brunch, Restaurants, French, Sandwiches, Cafes   
+        3                                                                                          Insurance, Financial Services   
+        4                         Home \& Garden, Nurseries \& Gardening, Shopping, Local Services, Automotive, Electronics Repair   
+        
+                city  good\_for\_kids  has\_bike\_parking  has\_wifi  \textbackslash{}
+        0    Calgary              1                 0         0   
+        1  Henderson              1                 0         0   
+        2   Montréal              1                 1         1   
+        3    Phoenix              0                 0         0   
+        4    Calgary              0                 0         0   
+        
+                                                                                                                                                                               hours  \textbackslash{}
+        0                         \{'Monday': '8:30-17:0', 'Tuesday': '11:0-21:0', 'Wednesday': '11:0-21:0', 'Thursday': '11:0-21:0', 'Friday': '11:0-21:0', 'Saturday': '11:0-21:0'\}   
+        1                                                                                                    \{'Friday': '17:0-23:0', 'Saturday': '17:0-23:0', 'Sunday': '17:0-23:0'\}   
+        2  \{'Monday': '10:0-22:0', 'Tuesday': '10:0-22:0', 'Wednesday': '10:0-22:0', 'Thursday': '10:0-22:0', 'Friday': '10:0-22:0', 'Saturday': '10:0-22:0', 'Sunday': '10:0-22:0'\}   
+        3                                                                                                                                                                       None   
+        4                                                       \{'Monday': '8:0-17:0', 'Tuesday': '8:0-17:0', 'Wednesday': '8:0-17:0', 'Thursday': '8:0-17:0', 'Friday': '8:0-17:0'\}   
+        
+           is\_open   latitude   longitude                  name  \textbackslash{}
+        0        1  51.091813 -114.031675  Minhas Micro Brewery   
+        1        0  35.960734 -114.939821   CK'S BBQ \& Catering   
+        2        0  45.540503  -73.599300         La Bastringue   
+        3        1  33.449999 -112.076979       Geico Insurance   
+        4        1  51.035591 -114.027366         Action Engine   
+        
+                        neighborhood postal\_code  price\_range  review\_count  stars  \textbackslash{}
+        0                                T2E 6L6            2            24    4.0   
+        1                                  89002            2             3    4.5   
+        2  Rosemont-La Petite-Patrie     H2G 1K7            2             5    4.0   
+        3                                  85003            0             8    1.5   
+        4                                T2H 0N5            0             4    2.0   
+        
+          state  take\_reservations  takes\_credit\_cards  
+        0    AB                  1                   1  
+        1    NV                  0                   1  
+        2    QC                  1                   0  
+        3    AZ                  0                   0  
+        4    AB                  0                   1  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{reviews}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}    average\_review\_age  average\_review\_length  average\_review\_sentiment  \textbackslash{}
+        0          524.458333             466.208333                  0.808638   
+        1         1199.589744             785.205128                  0.669126   
+        2          717.851852             536.592593                  0.820837   
+        3          751.750000             478.250000                  0.170925   
+        4          978.727273             436.181818                  0.562264   
+        
+                      business\_id  number\_cool\_votes  number\_funny\_votes  \textbackslash{}
+        0  --1UhMGODdWsrMastO9DZw                 16                   1   
+        1  --6MefnULPED\_I942VcFNA                 32                  27   
+        2  --7zmmkVg-IMGaXbuVd0SQ                 52                  29   
+        3  --8LPVSo5i0Oo61X01sV9A                  0                   0   
+        4  --9QQLMTbFzLJ\_oT-ON3Xw                  4                   3   
+        
+           number\_useful\_votes  
+        0                   15  
+        1                   53  
+        2                   81  
+        3                    9  
+        4                    7  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{users}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:}    average\_days\_on\_yelp  average\_number\_fans  average\_number\_friends  \textbackslash{}
+        0           1789.750000             1.833333               18.791667   
+        1           2039.948718            49.256410              214.564103   
+        2           1992.796296            19.222222              126.185185   
+        3           2095.750000             0.500000               25.250000   
+        4           1804.636364             1.000000               52.454545   
+        
+           average\_number\_years\_elite  average\_review\_count             business\_id  
+        0                    0.833333             57.541667  --1UhMGODdWsrMastO9DZw  
+        1                    1.769231            332.743590  --6MefnULPED\_I942VcFNA  
+        2                    1.814815            208.962963  --7zmmkVg-IMGaXbuVd0SQ  
+        3                    0.000000              7.500000  --8LPVSo5i0Oo61X01sV9A  
+        4                    0.090909             34.636364  --9QQLMTbFzLJ\_oT-ON3Xw  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{checkins}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:}               business\_id  \textbackslash{}
+        0  7KPBkxAOEtb3QeIL9PEErg   
+        1  kREVIrSBbtqBhIYkTccQUg   
+        2  tJRDll5yqpZwehenzE2cSg   
+        3  tZccfdl6JNw-j5BKnCTIQQ   
+        4  r1p7RAMzCV\_6NPF0dNoR3g   
+        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          time  \textbackslash{}
+        0  \{'Fri-0': 2, 'Sat-0': 1, 'Sun-0': 1, 'Wed-0': 2, 'Fri-1': 1, 'Sat-1': 3, 'Thu-1': 1, 'Wed-1': 1, 'Sat-2': 1, 'Sun-2': 2, 'Thu-2': 1, 'Wed-2': 1, 'Fri-3': 1, 'Sun-3': 3, 'Mon-4': 1, 'Thu-4': 1, 'Tue-4': 2, 'Wed-4': 2, 'Sun-6': 1, 'Wed-6': 1, 'Thu-7': 1, 'Fri-10': 3, 'Mon-10': 1, 'Sat-10': 3, 'Sun-10': 3, 'Tue-10': 2, 'Mon-11': 1, 'Thu-11': 1, 'Wed-11': 2, 'Mon-12': 1, 'Sat-12': 1, 'Tue-12': 1, 'Sat-13': 3, 'Thu-13': 1, 'Tue-13': 2, 'Wed-13': 3, 'Fri-14': 2, 'Mon-14': 1, 'Sat-14': 1, 'Sun-14':{\ldots}   
+        1                                                                                                                                                                                                                                                                                                                                                                                                                          \{'Mon-13': 1, 'Thu-13': 1, 'Sat-16': 1, 'Wed-17': 1, 'Sun-19': 1, 'Thu-20': 1, 'Sat-21': 1\}   
+        2                                                                                                                                                                                                                                                                                                                                                                                                                                         \{'Thu-0': 1, 'Mon-1': 1, 'Mon-12': 1, 'Sat-16': 1, 'Sun-22': 1, 'Fri-23': 1\}   
+        3                                                                                                                                                                                                                                                                                                                                                                                                                                                                              \{'Sun-14': 1, 'Fri-18': 1, 'Mon-20': 1\}   
+        4                                                                                                                                                                                                                                                                                                                                                                                                                                                     \{'Sat-3': 1, 'Sun-18': 1, 'Sat-21': 1, 'Sat-23': 1, 'Thu-23': 1\}   
+        
+           weekday\_checkins  weekend\_checkins  
+        0                76                75  
+        1                 4                 3  
+        2                 3                 3  
+        3                 1                 2  
+        4                 1                 4  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{tips}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:}    average\_tip\_length             business\_id  number\_tips
+        0           79.000000  --1UhMGODdWsrMastO9DZw            1
+        1           49.857143  --6MefnULPED\_I942VcFNA           14
+        2           52.500000  --7zmmkVg-IMGaXbuVd0SQ           10
+        3          136.500000  --9QQLMTbFzLJ\_oT-ON3Xw            2
+        4           68.064935  --9e1ONYQuAa-CB\_Rrw7Tw          154
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{photos}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:}    average\_caption\_length             business\_id  number\_pics
+         0                0.000000  --1UhMGODdWsrMastO9DZw            1
+         1               67.500000  --6MefnULPED\_I942VcFNA            2
+         2               30.426471  --9e1ONYQuAa-CB\_Rrw7Tw          136
+         3                0.000000  --DaPTJW3-tB1vP-PfdTEg            1
+         4                5.500000  --FBCX-N37CMYDfs790Bnw            4
+\end{Verbatim}
+            
+    How many different businesses are in the dataset? What are the different
+features in the review DataFrame?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{business}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{business}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+188593
+['address', 'alcohol?', 'attributes', 'business\_id', 'categories', 'city', 'good\_for\_kids', 'has\_bike\_parking', 'has\_wifi', 'hours', 'is\_open', 'latitude', 'longitude', 'name', 'neighborhood', 'postal\_code', 'price\_range', 'review\_count', 'stars', 'state', 'take\_reservations', 'takes\_credit\_cards']
+
+    \end{Verbatim}
+
+    What is the range of values for the features in the user DataFrame?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Min Values:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{users}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Max Values:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{users}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Min Values:
+average\_days\_on\_yelp                              76
+average\_number\_fans                                0
+average\_number\_friends                             1
+average\_number\_years\_elite                         0
+average\_review\_count                        0.666667
+business\_id                   --1UhMGODdWsrMastO9DZw
+dtype: object
+Max Values:
+average\_days\_on\_yelp                            4860
+average\_number\_fans                          1174.67
+average\_number\_friends                          4219
+average\_number\_years\_elite                   10.6667
+average\_review\_count                            6335
+business\_id                   zzzaIBwimxVej4tY6qFOUQ
+dtype: object
+
+    \end{Verbatim}
+
+    What is the Yelp rating, or \texttt{stars}, of the establishment with
+\texttt{business\_id} = \texttt{5EvUIR4IzCWUOm0PsUZXjA}. Use Pandas
+boolean indexing to find the Yelp rating, using the syntax below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df[df[}\StringTok{'column_we_know'}\NormalTok{] }\OperatorTok{==} \StringTok{'value_we_know'}\NormalTok{][}\StringTok{'column_we_want'}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{business}\PY{p}{[}\PY{n}{business}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{5EvUIR4IzCWUOm0PsUZXjA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} 30781    3.0
+         Name: stars, dtype: float64
+\end{Verbatim}
+            
+    What feature, or column, do the DataFrames have in common?
+
+    \hypertarget{merge-the-data}{%
+\subsection{Merge the Data}\label{merge-the-data}}
+
+Since we are working with data from several files, we need to combine
+the data into a single DataFrame that allows us to analyze the different
+features with respect to our target variable, the Yelp rating. We can do
+this by merging the multiple DataFrames we have together, joining them
+on the columns they have in common. In our case, this unique identifying
+column is the \texttt{business\_id}. We can merge two DataFrames
+together with the following syntax:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pd.merge(left, right, how}\OperatorTok{=}\StringTok{'inner/outer/left/right'}\NormalTok{, on}\OperatorTok{=}\StringTok{'column(s)_to_merge_on'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{left} is the DataFrame on the left side of our merge
+\item
+  \texttt{right} is the DataFrame on the right side of our merge
+\item
+  \texttt{how} describes the style of merge we want to complete (similar
+  to inner/outer/left/right joins in SQL)
+\item
+  \texttt{on} is the column or columns to perform the merge on (the
+  column connecting the two tables)
+\end{itemize}
+
+Given our six DataFrames, we will need to perform 5 merges to combine
+all the data into one DataFrame. In the cell below we merged the
+business table and the review table into a new DataFrame, \texttt{df},
+for you. After the merge we've added all the rows from
+\texttt{businesses} and \texttt{reviews} together, but kept the same
+total number of rows! Run the cell to perform the merge and confirm the
+number of rows in \texttt{df}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{business}\PY{p}{,} \PY{n}{reviews}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+188593
+
+    \end{Verbatim}
+
+    Merge each of the other 4 DataFrames into our new DataFrame \texttt{df}
+to combine all the data together. Make sure that \texttt{df} is the left
+DataFrame in each merge and \texttt{how=left} since not every DataFrame
+includes every business in the dataset (this way we won't lose any data
+during the merges). Once combined, print out the columns of \texttt{df}.
+What features are in this new DataFrame?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{users}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{checkins}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{tips}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{photos}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{on}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['address', 'alcohol?', 'attributes', 'business\_id', 'categories', 'city', 'good\_for\_kids', 'has\_bike\_parking', 'has\_wifi', 'hours', 'is\_open', 'latitude', 'longitude', 'name', 'neighborhood', 'postal\_code', 'price\_range', 'review\_count', 'stars', 'state', 'take\_reservations', 'takes\_credit\_cards', 'average\_review\_age', 'average\_review\_length', 'average\_review\_sentiment', 'number\_cool\_votes', 'number\_funny\_votes', 'number\_useful\_votes', 'average\_days\_on\_yelp', 'average\_number\_fans', 'average\_number\_friends', 'average\_number\_years\_elite', 'average\_review\_count', 'time', 'weekday\_checkins', 'weekend\_checkins', 'average\_tip\_length', 'number\_tips', 'average\_caption\_length', 'number\_pics']
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:}                address  alcohol?  \textbackslash{}
+         0    1314 44 Avenue NE         0   
+         1                              0   
+         2  1335 rue Beaubien E         1   
+         3      211 W Monroe St         0   
+         4  2005 Alyth Place SE         0   
+         
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     attributes  \textbackslash{}
+         0                                              \{'BikeParking': 'False', 'BusinessAcceptsCreditCards': 'True', 'BusinessParking': '\{'garage': False, 'street': True, 'validated': False, 'lot': False, 'valet': False\}', 'GoodForKids': 'True', 'HasTV': 'True', 'NoiseLevel': 'average', 'OutdoorSeating': 'False', 'RestaurantsAttire': 'casual', 'RestaurantsDelivery': 'False', 'RestaurantsGoodForGroups': 'True', 'RestaurantsPriceRange2': '2', 'RestaurantsReservations': 'True', 'RestaurantsTakeOut': 'True'\}   
+         1  \{'Alcohol': 'none', 'BikeParking': 'False', 'BusinessAcceptsCreditCards': 'True', 'BusinessParking': '\{'garage': False, 'street': True, 'validated': False, 'lot': True, 'valet': False\}', 'Caters': 'True', 'DogsAllowed': 'True', 'DriveThru': 'False', 'GoodForKids': 'True', 'GoodForMeal': '\{'dessert': False, 'latenight': False, 'lunch': False, 'dinner': False, 'breakfast': False, 'brunch': False\}', 'HasTV': 'False', 'OutdoorSeating': 'True', 'RestaurantsAttire': 'casual', 'RestaurantsDelivery'{\ldots}   
+         2  \{'Alcohol': 'beer\_and\_wine', 'Ambience': '\{'romantic': False, 'intimate': False, 'classy': False, 'hipster': False, 'touristy': False, 'trendy': False, 'upscale': False, 'casual': False\}', 'BikeParking': 'True', 'BusinessAcceptsCreditCards': 'False', 'BusinessParking': '\{'garage': False, 'street': False, 'validated': False, 'lot': False, 'valet': False\}', 'Caters': 'False', 'GoodForKids': 'True', 'GoodForMeal': '\{'dessert': False, 'latenight': False, 'lunch': False, 'dinner': False, 'breakfa{\ldots}   
+         3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 None   
+         4                                                                                                                                                                                                                                                                                                                                                                                                                                                                               \{'BusinessAcceptsCreditCards': 'True'\}   
+         
+                       business\_id  \textbackslash{}
+         0  Apn5Q\_b6Nz61Tq4XzPdf9A   
+         1  AjEbIBw6ZFfln7ePHha9PA   
+         2  O8S5hYJ1SMc8fA4QBtVujA   
+         3  bFzdJJ3wp3PZssNEsyU23g   
+         4  8USyCYqpScwiNEb58Bt6CA   
+         
+                                                                                                                       categories  \textbackslash{}
+         0                                                            Tours, Breweries, Pizza, Restaurants, Food, Hotels \& Travel   
+         1  Chicken Wings, Burgers, Caterers, Street Vendors, Barbeque, Food Trucks, Food, Restaurants, Event Planning \& Services   
+         2                                                             Breakfast \& Brunch, Restaurants, French, Sandwiches, Cafes   
+         3                                                                                          Insurance, Financial Services   
+         4                         Home \& Garden, Nurseries \& Gardening, Shopping, Local Services, Automotive, Electronics Repair   
+         
+                 city  good\_for\_kids  has\_bike\_parking  has\_wifi  \textbackslash{}
+         0    Calgary              1                 0         0   
+         1  Henderson              1                 0         0   
+         2   Montréal              1                 1         1   
+         3    Phoenix              0                 0         0   
+         4    Calgary              0                 0         0   
+         
+                                                                                                                                                                                hours  \textbackslash{}
+         0                         \{'Monday': '8:30-17:0', 'Tuesday': '11:0-21:0', 'Wednesday': '11:0-21:0', 'Thursday': '11:0-21:0', 'Friday': '11:0-21:0', 'Saturday': '11:0-21:0'\}   
+         1                                                                                                    \{'Friday': '17:0-23:0', 'Saturday': '17:0-23:0', 'Sunday': '17:0-23:0'\}   
+         2  \{'Monday': '10:0-22:0', 'Tuesday': '10:0-22:0', 'Wednesday': '10:0-22:0', 'Thursday': '10:0-22:0', 'Friday': '10:0-22:0', 'Saturday': '10:0-22:0', 'Sunday': '10:0-22:0'\}   
+         3                                                                                                                                                                       None   
+         4                                                       \{'Monday': '8:0-17:0', 'Tuesday': '8:0-17:0', 'Wednesday': '8:0-17:0', 'Thursday': '8:0-17:0', 'Friday': '8:0-17:0'\}   
+         
+            is\_open   latitude   longitude                  name  \textbackslash{}
+         0        1  51.091813 -114.031675  Minhas Micro Brewery   
+         1        0  35.960734 -114.939821   CK'S BBQ \& Catering   
+         2        0  45.540503  -73.599300         La Bastringue   
+         3        1  33.449999 -112.076979       Geico Insurance   
+         4        1  51.035591 -114.027366         Action Engine   
+         
+                         neighborhood postal\_code  price\_range  review\_count  stars  \textbackslash{}
+         0                                T2E 6L6            2            24    4.0   
+         1                                  89002            2             3    4.5   
+         2  Rosemont-La Petite-Patrie     H2G 1K7            2             5    4.0   
+         3                                  85003            0             8    1.5   
+         4                                T2H 0N5            0             4    2.0   
+         
+           state  take\_reservations  takes\_credit\_cards  average\_review\_age  \textbackslash{}
+         0    AB                  1                   1          618.250000   
+         1    NV                  0                   1          371.666667   
+         2    QC                  1                   0         1106.200000   
+         3    AZ                  0                   0          398.500000   
+         4    AB                  0                   1         1412.750000   
+         
+            average\_review\_length  average\_review\_sentiment  number\_cool\_votes  \textbackslash{}
+         0             532.916667                  0.865342                  5   
+         1             481.333333                  0.975000                  1   
+         2             252.000000                  0.301240                  2   
+         3             672.625000                 -0.060500                  0   
+         4            1015.500000                  0.372550                  0   
+         
+            number\_funny\_votes  number\_useful\_votes  average\_days\_on\_yelp  \textbackslash{}
+         0                   6                   13           1809.375000   
+         1                   0                    1            970.333333   
+         2                   0                    1           1499.600000   
+         3                   1                    3           1626.500000   
+         4                   0                    4           2570.000000   
+         
+            average\_number\_fans  average\_number\_friends  average\_number\_years\_elite  \textbackslash{}
+         0             5.375000               42.833333                    1.125000   
+         1             2.666667               64.333333                    0.666667   
+         2             1.000000                4.200000                    0.600000   
+         3             2.375000               12.500000                    0.250000   
+         4            26.750000              137.750000                    4.250000   
+         
+            average\_review\_count  \textbackslash{}
+         0            114.875000   
+         1             19.666667   
+         2             24.600000   
+         3             68.000000   
+         4            528.250000   
+         
+                                                                                                                                                                                                                                                                                     time  \textbackslash{}
+         0  \{'Fri-0': 1, 'Sun-0': 3, 'Thu-0': 1, 'Fri-1': 1, 'Fri-16': 1, 'Tue-17': 1, 'Sat-18': 1, 'Tue-18': 2, 'Wed-18': 1, 'Fri-19': 2, 'Thu-19': 2, 'Sat-20': 3, 'Thu-20': 1, 'Tue-20': 1, 'Sat-21': 2, 'Tue-21': 1, 'Fri-22': 1, 'Sat-22': 1, 'Thu-22': 1, 'Fri-23': 1, 'Sat-23': 1\}   
+         1                                                                                                                                                                                                                                                                   \{'Sun-1': 1\}   
+         2                                                                                                                                                                                        \{'Mon-0': 1, 'Sun-0': 1, 'Fri-1': 1, 'Sun-1': 1, 'Sat-17': 1, 'Wed-20': 1, 'Sat-23': 1\}   
+         3                                                                                                                                                                                                                                                                  \{'Wed-18': 1\}   
+         4                                                                                                                                                                                                                                                     \{'Thu-14': 1, 'Thu-20': 1\}   
+         
+            weekday\_checkins  weekend\_checkins  average\_tip\_length  number\_tips  \textbackslash{}
+         0              11.0              18.0                38.0          6.0   
+         1               0.0               1.0                66.0          1.0   
+         2               2.0               5.0                32.0          1.0   
+         3               1.0               0.0                 NaN          NaN   
+         4               2.0               0.0                 NaN          NaN   
+         
+            average\_caption\_length  number\_pics  
+         0                     NaN          NaN  
+         1                    29.0          1.0  
+         2                     NaN          NaN  
+         3                     NaN          NaN  
+         4                     NaN          NaN  
+\end{Verbatim}
+            
+    \hypertarget{clean-the-data}{%
+\subsection{Clean the Data}\label{clean-the-data}}
+
+We are getting really close to the fun analysis part! We just have to
+clean our data a bit so we can focus on the features that might have
+predictive power for determining an establishment's Yelp rating.
+
+In a Linear Regression model, our features will ideally be continuous
+variables that have an affect on our dependent variable, the Yelp
+rating. For this project with will also be working with some features
+that are binary, on the scale {[}0,1{]}. With this information, we can
+remove any columns in the dataset that are not continuous or binary, and
+that we do not want to make predictions on. The cell below contains a
+list of these unnecessary features. Drop them from \texttt{df} with
+Pandas' drop syntax, provided below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.drop(list_of_features_to_remove, axis}\OperatorTok{=}\DecValTok{1}\NormalTok{, inplace}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{list\_of\_features\_to\_remove} is, you guessed it, the list
+  of features we want to remove!
+\item
+  \texttt{axis=1} lets Pandas know we want to drop columns, not rows,
+  from our DataFrame (axis=0 is used for computations along rows!)
+\item
+  \texttt{inplace=True} lets us drop the columns right here in our
+  DataFrame, instead of returning a new DataFrame that we could store in
+  a new variable
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{features\PYZus{}to\PYZus{}remove} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{address}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{attributes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{business\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{categories}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{city}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hours}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{is\PYZus{}open}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{neighborhood}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{postal\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{state}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{features\PYZus{}to\PYZus{}remove}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    Now we just have to check our data to make sure we don't have any
+missing values, or \texttt{NaN}s, which will prevent the Linear
+Regression model from running correctly. To do this we can use the
+statement \texttt{df.isna().any()}. This will check all of our columns
+and return \texttt{True} if there are any missing values or
+\texttt{NaN}s, or \texttt{False} if there are no missing values. Check
+if \texttt{df} is missing any values.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{df}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} alcohol?                      False
+         good\_for\_kids                 False
+         has\_bike\_parking              False
+         has\_wifi                      False
+         price\_range                   False
+         review\_count                  False
+         stars                         False
+         take\_reservations             False
+         takes\_credit\_cards            False
+         average\_review\_age            False
+         average\_review\_length         False
+         average\_review\_sentiment      False
+         number\_cool\_votes             False
+         number\_funny\_votes            False
+         number\_useful\_votes           False
+         average\_days\_on\_yelp          False
+         average\_number\_fans           False
+         average\_number\_friends        False
+         average\_number\_years\_elite    False
+         average\_review\_count          False
+         weekday\_checkins               True
+         weekend\_checkins               True
+         average\_tip\_length             True
+         number\_tips                    True
+         average\_caption\_length         True
+         number\_pics                    True
+         dtype: bool
+\end{Verbatim}
+            
+    As you can see, there are a few columns with missing values. Since our
+dataset has no information recorded for some businesses in these
+columns, we will assume the Yelp pages did not display these features.
+For example, if there is a \texttt{NaN} value for \texttt{number\_pics},
+it means that the associated business did not have any pictures posted
+on its Yelp page. Thus we can replace all of our \texttt{NaN}s with
+\texttt{0}s. To do this we can use the \texttt{.fillna()} method, which
+takes a dictionary as shown below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.fillna(\{}\StringTok{'column_1'}\NormalTok{:val_to_replace_na,}
+           \StringTok{'column_2'}\NormalTok{:val_to_replace_na,}
+           \StringTok{'column_3'}\NormalTok{:val_to_replace_na\},}
+\NormalTok{          inplace}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{column\_1}, \texttt{column\_2}, and \texttt{column\_3} are the
+  columns with missing values that we want to fill. We can include as
+  many columns as we like in the dictionary that is passed to
+  \texttt{.fill\_na()}
+\item
+  \texttt{val\_to\_replace\_na} is the value that will replace the
+  missing values, or \texttt{NaN}s
+\item
+  \texttt{inplace=True} since we want to perform our changes in place
+  and not return a new DataFrame
+\end{itemize}
+
+Fill the missing values in \texttt{df} with \texttt{0}. Afterwards,
+confirm the missing values have been filled with
+\texttt{df.isna().any()}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{df}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weekday\PYZus{}checkins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}
+                    \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weekend\PYZus{}checkins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}
+                   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}tip\PYZus{}length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}
+                   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{number\PYZus{}tips}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}
+                   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}caption\PYZus{}length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}
+                   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{number\PYZus{}pics}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} alcohol?                      False
+         good\_for\_kids                 False
+         has\_bike\_parking              False
+         has\_wifi                      False
+         price\_range                   False
+         review\_count                  False
+         stars                         False
+         take\_reservations             False
+         takes\_credit\_cards            False
+         average\_review\_age            False
+         average\_review\_length         False
+         average\_review\_sentiment      False
+         number\_cool\_votes             False
+         number\_funny\_votes            False
+         number\_useful\_votes           False
+         average\_days\_on\_yelp          False
+         average\_number\_fans           False
+         average\_number\_friends        False
+         average\_number\_years\_elite    False
+         average\_review\_count          False
+         weekday\_checkins              False
+         weekend\_checkins              False
+         average\_tip\_length            False
+         number\_tips                   False
+         average\_caption\_length        False
+         number\_pics                   False
+         dtype: bool
+\end{Verbatim}
+            
+    \hypertarget{exploratory-analysis}{%
+\subsection{Exploratory Analysis}\label{exploratory-analysis}}
+
+Now that our data is all together, let's investigate some of the
+different features to see what might correlate most with our dependent
+variable, the Yelp rating (called \texttt{stars} in our DataFrame). The
+features with the best correlations could prove to be the most helpful
+for our Linear Regression model! Pandas DataFrames have a really helpful
+method, \texttt{.corr()}, that allows us to see the correlation
+coefficients for each pair of our different features. Remember, a
+correlation of \texttt{0} indicates that two features have no linear
+relationship, a correlation coefficient of \texttt{1} indicates two
+features have a perfect positive linear relationship, and a correlation
+coefficient of \texttt{-1} indicates two features have a perfect
+negative linear relationship. Call \texttt{.corr()} on \texttt{df}.
+You'll see that \texttt{number\_funny\_votes} has a correlation
+coefficient of \texttt{0.001320} with respect to \texttt{stars}, our
+Yelp rating. This is a very weak correlation. What features best
+correlate, both positively and negatively, with Yelp rating?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n+nb}{list}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s1}{ correlation: }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{col}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+alcohol? correlation: -0.04333212810315644
+good\_for\_kids correlation: -0.030381991019304572
+has\_bike\_parking correlation: 0.0680844539056718
+has\_wifi correlation: -0.03985689725556038
+price\_range correlation: -0.05256472745725945
+review\_count correlation: 0.03241331330172572
+stars correlation: 1.0
+take\_reservations correlation: -0.02448603044314801
+takes\_credit\_cards correlation: 0.037747970234967135
+average\_review\_age correlation: -0.1256454821766212
+average\_review\_length correlation: -0.2770811669232536
+average\_review\_sentiment correlation: 0.7821870918438224
+number\_cool\_votes correlation: 0.043375254537672076
+number\_funny\_votes correlation: 0.0013201028888184217
+number\_useful\_votes correlation: -6.624166231789868e-05
+average\_days\_on\_yelp correlation: -0.038061289170665744
+average\_number\_fans correlation: -0.031140654505947395
+average\_number\_friends correlation: -0.007629353204849621
+average\_number\_years\_elite correlation: -0.06441927064714799
+average\_review\_count correlation: -0.06657248097194297
+weekday\_checkins correlation: 0.004129812190851356
+weekend\_checkins correlation: 0.00786283159165689
+average\_tip\_length correlation: -0.05289924259812708
+number\_tips correlation: 0.014037585569833113
+average\_caption\_length correlation: 3.9691081490092353e-05
+number\_pics correlation: 0.001727280733274771
+
+    \end{Verbatim}
+
+    To further visualize these relationships, we can plot certain features
+against our dependent variable, the Yelp rating. In the cell below we
+have provided the code to import Matplotlib. We can use Matplotlib's
+\texttt{.scatter()} method with the below syntax to plot what these
+correlations look like:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plt.scatter(x_values_to_plot, y_values_to_plot, alpha}\OperatorTok{=}\NormalTok{blending_val)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{x\_values\_to\_plot} are the values to be plotted along the
+  x-axis
+\item
+  \texttt{y\_values\_to\_plot} are the values to be plotted along the
+  y-axis
+\item
+  \texttt{alpha=blending\_val} is the blending value, or how transparent
+  (0) or opaque (1) a plotted point is. This will help us distinguish
+  areas of the plot with high point densities and low point densities
+\end{itemize}
+
+Plot the three features that correlate most with Yelp rating
+(\texttt{average\_review\_sentiment}, \texttt{average\_review\_length},
+\texttt{average\_review\_age}) against \texttt{stars}, our Yelp rating.
+Then plot a lowly correlating feature, such as
+\texttt{number\_funny\_votes}, against \texttt{stars}.
+
+\begin{quote}
+What is \texttt{average\_review\_sentiment}, you ask?
+\texttt{average\_review\_sentiment} is the average sentiment score for
+all reviews on a business' Yelp page. The sentiment score for a review
+was calculated using the sentiment analysis tool
+\href{https://github.com/cjhutto/vaderSentiment}{VADER}. VADER uses a
+labeled set of positive and negative words, along with codified rules of
+grammar, to estimate how positive or negative a statement is. Scores
+range from \texttt{-1}, most negative, to \texttt{+1}, most positive,
+with a score of \texttt{0} indicating a neutral statement. While not
+perfect, VADER does a good job at guessing the sentiment of text data!
+\end{quote}
+
+What kind of relationships do you see from the plots? Do you think these
+variables are good or bad features for our Yelp rating prediction model?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+         
+         \PY{c+c1}{\PYZsh{} plot average\PYZus{}review\PYZus{}sentiment against stars here}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}review\PYZus{}sentiment}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.25}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{} plot average\PYZus{}review\PYZus{}length against stars here}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}review\PYZus{}length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.25}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{} plot average\PYZus{}review\PYZus{}age against stars here}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}review\PYZus{}age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.25}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{} plot number\PYZus{}funny\PYZus{}votes against stars here}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{number\PYZus{}funny\PYZus{}votes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.25}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Why do you think \texttt{average\_review\_sentiment} correlates so well
+with Yelp rating?
+
+\texttt{average\_review\_sentiment} usually correlates well because
+\texttt{VADER} is particularly good at determining the relative
+positivity and negativity of a review - which is essentially exactly
+what the user does to determine a good or bad review.
+
+    \hypertarget{data-selection}{%
+\subsection{Data Selection}\label{data-selection}}
+
+In order to put our data into a Linear Regression model, we need to
+separate out our features to model on and the Yelp ratings. From our
+correlation analysis we saw that the three features with the strongest
+correlations to Yelp rating are \texttt{average\_review\_sentiment},
+\texttt{average\_review\_length}, and \texttt{average\_review\_age}.
+Since we want to dig a little deeper than
+\texttt{average\_review\_sentiment}, which understandably has a very
+high correlation with Yelp rating, let's choose to create our first
+model with \texttt{average\_review\_length} and
+\texttt{average\_review\_age} as features.
+
+Pandas lets us select one column of a DataFrame with the following
+syntax:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{subset_of_data }\OperatorTok{=}\NormalTok{ df[}\StringTok{'feature_to_select'}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+Pandas also lets us select multiple columns from a DataFrame with this
+syntax:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{subset_of_data }\OperatorTok{=}\NormalTok{ df[list_of_features_to_select]}
+\end{Highlighting}
+\end{Shaded}
+
+Create a new DataFrame \texttt{features} that contains the columns we
+want to model on: \texttt{average\_review\_length} and
+\texttt{average\_review\_age}. Then create another DataFrame
+\texttt{ratings} that stores the value we want to predict, Yelp rating,
+or \texttt{stars} in \texttt{df}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{features} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}review\PYZus{}length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}review\PYZus{}age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         \PY{n}{ratings} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \hypertarget{split-the-data-into-training-and-testing-sets}{%
+\subsection{Split the Data into Training and Testing
+Sets}\label{split-the-data-into-training-and-testing-sets}}
+
+We are just about ready to model! But first, we need to break our data
+into a training set and a test set so we can evaluate how well our model
+performs. We'll use scikit-learn's \texttt{train\_test\_split} function
+to do this split, which is provided in the cell below. This function
+takes two required parameters: the data, or our features, followed by
+our dependent variable, in our case the Yelp rating. Set the optional
+parameter \texttt{test\_size} to be \texttt{0.2}. Finally, set the
+optional parameter \texttt{random\_state} to \texttt{1}. This will make
+it so your data is split in the same way as the data in our solution
+code.
+
+Remember, this function returns 4 items in this order: 1. The training
+data (features), which we can assign to \texttt{X\_train} 2. The testing
+data (features), which we can assign to \texttt{X\_test} 3. The training
+dependent variable (Yelp rating), which we can assign to
+\texttt{y\_train} 4. The testing dependent variable (Yelp rating), which
+we can assign to \texttt{y\_test}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+         \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{features}\PY{p}{,} \PY{n}{ratings}\PY{p}{,} \PY{n}{train\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.8}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{create-and-train-the-model}{%
+\subsection{Create and Train the
+Model}\label{create-and-train-the-model}}
+
+Now that our data is split into training and testing sets, we can
+finally model! In the cell below we have provided the code to import
+\texttt{LinearRegression} from scikit-learn's \texttt{linear\_model}
+module. Create a new \texttt{LinearRegression} object named
+\texttt{model}. The \texttt{.fit()} method will fit our Linear
+Regression model to our training data and calculate the coefficients for
+our features. Call the \texttt{.fit()} method on \texttt{model} with
+\texttt{X\_train} and \texttt{y\_train} as parameters. Just like that
+our model has now been trained on our training data!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}
+         
+         \PY{n}{model} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:} LinearRegression(copy\_X=True, fit\_intercept=True, n\_jobs=None,
+                  normalize=False)
+\end{Verbatim}
+            
+    \hypertarget{evaluate-and-understand-the-model}{%
+\subsection{Evaluate and Understand the
+Model}\label{evaluate-and-understand-the-model}}
+
+Now we can evaluate our model in a variety of ways. The first way will
+be by using the \texttt{.score()} method, which provides the R\^{}2
+value for our model. Remember, R\^{}2 is the coefficient of
+determination, or a measure of how much of the variance in our dependent
+variable, the predicted Yelp rating, is explained by our independent
+variables, our feature data. R\^{}2 values range from \texttt{0} to
+\texttt{1}, with \texttt{0} indicating that the created model does not
+fit our data at all, and with \texttt{1} indicating the model perfectly
+fits our feature data. Call \texttt{.score()} on our model with
+\texttt{X\_train} and \texttt{y\_train} as parameters to calculate our
+training R\^{}2 score. Then call \texttt{.score()} again on model with
+\texttt{X\_test} and \texttt{y\_test} as parameters to calculate R\^{}2
+for our testing data. What do these R\^{}2 values say about our model?
+Do you think these features alone are able to effectively predict Yelp
+ratings?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.08347067576537714
+0.07709732008168868
+
+    \end{Verbatim}
+
+    After all that hard work, we can finally take a look at the coefficients
+on our different features! The model has an attribute \texttt{.coef\_}
+which is an array of the feature coefficients determined by fitting our
+model to the training data. To make it easier for you to see which
+feature corresponds to which coefficient, we have provided some code in
+the cell that \texttt{zip}s together a list of our features with the
+coefficients and sorts them in descending order from most predictive to
+least predictive.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n+nb}{sorted}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}review\PYZus{}length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}review\PYZus{}age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{model}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{key} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{reverse}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} [('average\_review\_length', -0.0010060376485183664),
+          ('average\_review\_age', -0.00011673415914578238)]
+\end{Verbatim}
+            
+    Lastly we can calculate the predicted Yelp ratings for our testing data
+and compare them to their actual Yelp ratings! Our model has a
+\texttt{.predict()} method which uses the model's coefficients to
+calculate the predicted Yelp rating. Call \texttt{.predict()} on
+\texttt{X\_test} and assign the values to \texttt{y\_predicted}. Use
+Matplotlib to plot \texttt{y\_test} vs \texttt{y\_predicted}. For a
+perfect linear regression model we would expect to see the data plotted
+along the line \texttt{y\ =\ x}, indicating homoscedasticity. Is this
+the case? If not, why not? Would you call this model heteroscedastic or
+homoscedastic?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{y\PYZus{}predicted} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}predicted}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Prediction vs Test of Model}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Prediction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_48_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{define-different-subsets-of-data}{%
+\subsection{Define Different Subsets of
+Data}\label{define-different-subsets-of-data}}
+
+After evaluating the first model, you can see that
+\texttt{average\_review\_length} and \texttt{average\_review\_age} alone
+are not the best predictors for Yelp rating. Let's go do some more
+modeling with different subsets of features and see if we can achieve a
+more accurate model! In the cells below we have provided different lists
+of subsets of features that we will model with and evaluate. What other
+subsets of features would you want to test? Why do you think those
+feature sets are more predictive of Yelp rating than others? Create at
+least one more subset of features that you want to predict Yelp ratings
+from.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{c+c1}{\PYZsh{} subset of only average review sentiment}
+         \PY{n}{sentiment} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}review\PYZus{}sentiment}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{c+c1}{\PYZsh{} subset of all features that have a response range [0,1]}
+         \PY{n}{binary\PYZus{}features} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alcohol?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{has\PYZus{}bike\PYZus{}parking}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{takes\PYZus{}credit\PYZus{}cards}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{good\PYZus{}for\PYZus{}kids}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{take\PYZus{}reservations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{has\PYZus{}wifi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{c+c1}{\PYZsh{} subset of all features that vary on a greater range than [0,1]}
+         \PY{n}{numeric\PYZus{}features} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{review\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price\PYZus{}range}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}caption\PYZus{}length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{number\PYZus{}pics}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}review\PYZus{}age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}review\PYZus{}length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}review\PYZus{}sentiment}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{number\PYZus{}funny\PYZus{}votes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{number\PYZus{}cool\PYZus{}votes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{number\PYZus{}useful\PYZus{}votes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}tip\PYZus{}length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{number\PYZus{}tips}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}number\PYZus{}friends}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}days\PYZus{}on\PYZus{}yelp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}number\PYZus{}fans}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}review\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}number\PYZus{}years\PYZus{}elite}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weekday\PYZus{}checkins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weekend\PYZus{}checkins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{c+c1}{\PYZsh{} all features}
+         \PY{n}{all\PYZus{}features} \PY{o}{=} \PY{n}{binary\PYZus{}features} \PY{o}{+} \PY{n}{numeric\PYZus{}features}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{c+c1}{\PYZsh{} add your own feature subset here}
+         \PY{c+c1}{\PYZsh{} I am choosing the three columns with the largest correlation}
+         \PY{n}{feature\PYZus{}subset} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}review\PYZus{}sentiment}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}review\PYZus{}age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average\PYZus{}review\PYZus{}length}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \hypertarget{further-modeling}{%
+\subsection{Further Modeling}\label{further-modeling}}
+
+    Now that we have lists of different feature subsets, we can create new
+models from them. In order to more easily compare the performance of
+these new models, we have created a function for you below called
+\texttt{model\_these\_features()}. This function replicates the model
+building process you just completed with our first model! Take some time
+to review how the function works, analyzing it line by line. Fill in the
+empty comments with an explanation of the task the code beneath it is
+performing.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         
+         \PY{c+c1}{\PYZsh{} take a list of features to model as a parameter}
+         \PY{k}{def} \PY{n+nf}{model\PYZus{}these\PYZus{}features}\PY{p}{(}\PY{n}{feature\PYZus{}list}\PY{p}{)}\PY{p}{:}
+             
+             \PY{c+c1}{\PYZsh{} }
+             \PY{n}{ratings} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             \PY{n}{features} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{feature\PYZus{}list}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} }
+             \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{features}\PY{p}{,} \PY{n}{ratings}\PY{p}{,} \PY{n}{test\PYZus{}size} \PY{o}{=} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{random\PYZus{}state} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} don\PYZsq{}t worry too much about these lines, just know that they allow the model to work when}
+             \PY{c+c1}{\PYZsh{} we model on just one feature instead of multiple features. Trust us on this one :)}
+             \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mi}{2}\PY{p}{:}
+                 \PY{n}{X\PYZus{}train} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{X\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} }
+             \PY{n}{model} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} }
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train Score:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{model}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test Score:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{model}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} print the model features and their corresponding coefficients, from most predictive to least predictive}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n+nb}{sorted}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{feature\PYZus{}list}\PY{p}{,}\PY{n}{model}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{key} \PY{o}{=} \PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{reverse}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} }
+             \PY{n}{y\PYZus{}predicted} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} }
+             \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}predicted}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.25}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yelp Rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Predicted Yelp Rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    Once you feel comfortable with the steps of the function, run models on
+the following subsets of data using \texttt{model\_these\_features()}: *
+\texttt{sentiment}: only \texttt{average\_review\_sentiment} *
+\texttt{binary\_features}: all features that have a response range
+{[}0,1{]} * \texttt{numeric\_features}: all features that vary on a
+greater range than {[}0,1{]} * \texttt{all\_features}: all features *
+\texttt{feature\_subset}: your own feature subset
+
+How does changing the feature sets affect the model's R\^{}2 value?
+Which features are most important to predicting Yelp rating in the
+different models? Which models appear more or less homoscedastic?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{c+c1}{\PYZsh{} create a model on sentiment here}
+         \PY{n}{model\PYZus{}these\PYZus{}features}\PY{p}{(}\PY{n}{sentiment}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train Score: 0.6118980950438655
+Test Score: 0.6114021046919492
+[('average\_review\_sentiment', 2.3033908433749586)]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_59_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{c+c1}{\PYZsh{} create a model on all binary features here}
+         \PY{n}{model\PYZus{}these\PYZus{}features}\PY{p}{(}\PY{n}{binary\PYZus{}features}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train Score: 0.012223180709591164
+Test Score: 0.010119542202269072
+[('has\_bike\_parking', 0.19003008208039676), ('alcohol?', -0.14549670708138332), ('has\_wifi', -0.13187397577762547), ('good\_for\_kids', -0.08632485990337231), ('takes\_credit\_cards', 0.07175536492195614), ('take\_reservations', 0.04526558530451594)]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_60_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{c+c1}{\PYZsh{} create a model on all numeric features here}
+         \PY{n}{model\PYZus{}these\PYZus{}features}\PY{p}{(}\PY{n}{numeric\PYZus{}features}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train Score: 0.673499259376666
+Test Score: 0.6713318798120138
+[('average\_review\_sentiment', 2.2721076642097686), ('price\_range', -0.0804608096270259), ('average\_number\_years\_elite', -0.07190366288054195), ('average\_caption\_length', -0.00334706600778316), ('number\_pics', -0.0029565028128950613), ('number\_tips', -0.0015953050789039144), ('number\_cool\_votes', 0.0011468839227082779), ('average\_number\_fans', 0.0010510602097444858), ('average\_review\_length', -0.0005813655692094847), ('average\_tip\_length', -0.0005322032063458541), ('number\_useful\_votes', -0.00023203784758702592), ('average\_review\_count', -0.00022431702895061526), ('average\_review\_age', -0.0001693060816507226), ('average\_days\_on\_yelp', 0.00012878025876700503), ('weekday\_checkins', 5.918580754475574e-05), ('weekend\_checkins', -5.518176206986478e-05), ('average\_number\_friends', 4.826992111594799e-05), ('review\_count', -3.48348376378989e-05), ('number\_funny\_votes', -7.884395674183897e-06)]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{c+c1}{\PYZsh{} create a model on all features here}
+         \PY{n}{model\PYZus{}these\PYZus{}features}\PY{p}{(}\PY{n}{all\PYZus{}features}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train Score: 0.6807828861895333
+Test Score: 0.6782129045869245
+[('average\_review\_sentiment', 2.280845699662378), ('alcohol?', -0.14991498593470778), ('has\_wifi', -0.12155382629262777), ('good\_for\_kids', -0.11807814422012647), ('price\_range', -0.06486730150041178), ('average\_number\_years\_elite', -0.0627893971389538), ('has\_bike\_parking', 0.027296969912285574), ('takes\_credit\_cards', 0.02445183785362615), ('take\_reservations', 0.014134559172970311), ('number\_pics', -0.0013133612300815713), ('average\_number\_fans', 0.0010267986822657448), ('number\_cool\_votes', 0.000972372273441118), ('number\_tips', -0.0008546563320877247), ('average\_caption\_length', -0.0006472749798191067), ('average\_review\_length', -0.0005896257920272376), ('average\_tip\_length', -0.00042052175034057535), ('number\_useful\_votes', -0.00027150641256160215), ('average\_review\_count', -0.00023398356902509327), ('average\_review\_age', -0.00015776544111326904), ('average\_days\_on\_yelp', 0.00012326147662885747), ('review\_count', 0.00010112259377384992), ('weekend\_checkins', -9.239617469645031e-05), ('weekday\_checkins', 6.1539091231461e-05), ('number\_funny\_votes', 4.8479351025072536e-05), ('average\_number\_friends', 2.0695840373717654e-05)]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{c+c1}{\PYZsh{} create a model on your feature subset here}
+         \PY{n}{model\PYZus{}these\PYZus{}features}\PY{p}{(}\PY{n}{feature\PYZus{}subset}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train Score: 0.6520510292564032
+Test Score: 0.6495675480094902
+[('average\_review\_sentiment', 2.2430303104417084), ('average\_review\_length', -0.000597830017880432), ('average\_review\_age', -0.00015209936823152404)]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_63_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{danielles-delicious-delicacies-debut}{%
+\subsection{Danielle's Delicious Delicacies'
+Debut}\label{danielles-delicious-delicacies-debut}}
+
+You've loaded the data, cleaned it, modeled it, and evaluated it. You're
+tired, but glowing with pride after all the hard work. You close your
+eyes and can clearly see opening day of Danielle's Delicious Delicacies
+with a line out the door. But what will your Yelp rating be? Let's use
+our model to make a prediction.
+
+Our best model was the model using all features, so we'll work with this
+model again. In the cell below print \texttt{all\_features} to get a
+reminder of what features we are working with.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{all\PYZus{}features}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['alcohol?', 'has\_bike\_parking', 'takes\_credit\_cards', 'good\_for\_kids', 'take\_reservations', 'has\_wifi', 'review\_count', 'price\_range', 'average\_caption\_length', 'number\_pics', 'average\_review\_age', 'average\_review\_length', 'average\_review\_sentiment', 'number\_funny\_votes', 'number\_cool\_votes', 'number\_useful\_votes', 'average\_tip\_length', 'number\_tips', 'average\_number\_friends', 'average\_days\_on\_yelp', 'average\_number\_fans', 'average\_review\_count', 'average\_number\_years\_elite', 'weekday\_checkins', 'weekend\_checkins']
+
+    \end{Verbatim}
+
+    Run the cell below to grab all the features and retrain our model on
+them.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{n}{features} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{all\PYZus{}features}\PY{p}{]}
+         \PY{n}{ratings} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{features}\PY{p}{,} \PY{n}{ratings}\PY{p}{,} \PY{n}{test\PYZus{}size} \PY{o}{=} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{random\PYZus{}state} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{model} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}72}]:} LinearRegression(copy\_X=True, fit\_intercept=True, n\_jobs=None,
+                  normalize=False)
+\end{Verbatim}
+            
+    To give you some perspective on the restaurants already out there, we
+have provided the mean, minimum, and maximum values for each feature
+below. Will Danielle's Delicious Delicacies be just another average
+restaurant, or will it be a 5 star behemoth amongst the masses?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{features}\PY{o}{.}\PY{n}{columns}\PY{p}{,}\PY{n}{features}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{features}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{min}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{features}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Feature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Min}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Max}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}73}]:}                        Feature         Mean        Min           Max
+         0                     alcohol?     0.140610   0.000000      1.000000
+         1             has\_bike\_parking     0.350692   0.000000      1.000000
+         2           takes\_credit\_cards     0.700243   0.000000      1.000000
+         3                good\_for\_kids     0.279029   0.000000      1.000000
+         4            take\_reservations     0.106086   0.000000      1.000000
+         5                     has\_wifi     0.134968   0.000000      1.000000
+         6                 review\_count    31.797310   3.000000   7968.000000
+         7                  price\_range     1.035855   0.000000      4.000000
+         8       average\_caption\_length     2.831829   0.000000    140.000000
+         9                  number\_pics     1.489939   0.000000   1150.000000
+         10          average\_review\_age  1175.501021  71.555556   4727.333333
+         11       average\_review\_length   596.463567  62.400000   4229.000000
+         12    average\_review\_sentiment     0.554935  -0.995200      0.996575
+         13          number\_funny\_votes    15.617091   0.000000  36822.000000
+         14           number\_cool\_votes    18.495973   0.000000   6572.000000
+         15         number\_useful\_votes    43.515279   0.000000  38357.000000
+         16          average\_tip\_length    45.643426   0.000000    500.000000
+         17                 number\_tips     6.285217   0.000000   3581.000000
+         18      average\_number\_friends   105.132000   1.000000   4219.000000
+         19        average\_days\_on\_yelp  2005.367009  76.000000   4860.000000
+         20         average\_number\_fans    11.590148   0.000000   1174.666667
+         21        average\_review\_count   122.110660   0.666667   6335.000000
+         22  average\_number\_years\_elite     0.923313   0.000000     10.666667
+         23            weekday\_checkins    45.385094   0.000000  73830.000000
+         24            weekend\_checkins    49.612515   0.000000  64647.000000
+\end{Verbatim}
+            
+    Based on your plans for the restaurant, how you expect your customers to
+post on your Yelp page, and the values above, fill in the blanks in the
+NumPy array below with your desired values. The first blank corresponds
+with the feature at \texttt{index=0} in the DataFrame above,
+\texttt{alcohol?}, and the last blank corresponds to the feature at
+\texttt{index=24}, \texttt{weekend\_checkins}. Make sure to enter either
+\texttt{0} or \texttt{1} for all binary features, and if you aren't sure
+of what value to put for a feature, select the mean from the DataFrame
+above. After you enter the values, run the prediction cell below to
+receive your Yelp rating! How is Danielle's Delicious Delicacies debut
+going to be?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}74}]:} \PY{n}{danielles\PYZus{}delicious\PYZus{}delicacies} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{32}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1175}\PY{p}{,}\PY{l+m+mi}{600}\PY{p}{,}\PY{l+m+mf}{0.55}\PY{p}{,}\PY{l+m+mf}{15.6}\PY{p}{,}\PY{l+m+mf}{18.5}\PY{p}{,}\PY{l+m+mf}{43.5}\PY{p}{,}\PY{l+m+mf}{45.6}\PY{p}{,}\PY{l+m+mf}{6.3}\PY{p}{,}\PY{l+m+mi}{200}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{danielles\PYZus{}delicious\PYZus{}delicacies}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}75}]:} array([3.10716805])
+\end{Verbatim}
+            
+    \hypertarget{next-steps}{%
+\subsection{Next Steps}\label{next-steps}}
+
+You have successfully built a linear regression model that predicts a
+restaurant's Yelp rating! As you have seen, it can be pretty hard to
+predict a rating like this even when we have a plethora of data. What
+other questions come to your mind when you see the data we have? What
+insights do you think could come from a different kind of analysis? Here
+are some ideas to ponder:
+
+\begin{itemize}
+\tightlist
+\item
+  Can we predict the cuisine of a restaurant based on the users that
+  review it?
+\item
+  What restaurants are similar to each other in ways besides cuisine?
+\item
+  Are there different restaurant vibes, and what kind of restaurants fit
+  these conceptions?
+\item
+  How does social media status affect a restaurant's credibility and
+  visibility?
+\end{itemize}
+
+As you progress further into the field of data science, you will be able
+to create models that address these questions and many more! But in the
+meantime, get back to working on that burgeoning restaurant business
+plan.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
