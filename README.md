@@ -25,3 +25,9 @@ This repository is for some personal projects I have been working on involving m
 ### Tic Tac Toe AI (Codecademy)
 - Minimax Recursion 
 - Tic Tac Toe game
+
+### Email Similarity
+- sklearn email dataset
+- Naive Bayes classification
+- Word Count Vectorization
+
